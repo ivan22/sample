@@ -26,7 +26,8 @@ describe ProductsController do
 
   describe '#create' do
     def do_request
-      post :create, { product: {title: '123', description: '123', price: 15.99} }
+      category = Category.create!(title: '123')
+      post :create, { product: {title: '123', description: '123', price: 15.99, category_id: category.id} }
     end
 
     it 'should create the product' do
