@@ -1,3 +1,4 @@
 class Product < ActiveRecord::Base
-  validates_presence_of :title, :price, :description
+  belongs_to :category
+  validates_presence_of :title, :price, :description, :category
 end
