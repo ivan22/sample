@@ -26,13 +26,27 @@ describe ProductsController do
 
   describe '#create' do
     def do_request
-      category = Category.create!(title: '123')
-      post :create, { product: {title: '123', description: '123', price: 15.99, category_id: category.id} }
+      post :create, params
     end
 
-    it 'should create the product' do
-      expect { do_request }.to change(Product, :count).by(1)
-      response.should redirect_to new_product_url
+    let!(:category) { create(:category) }
+
+    context 'Success' do
+      let!(:params) { { product: attributes_for(:product, category_id: category.id) } }
+
+      it 'should create the product' do
+        expect { do_request }.to change(Product, :count).by(1)
+        response.should redirect_to new_product_url
+      end
+    end
+
+    context 'failure' do
+      let!(:params) { { product: attributes_for(:product, category_id: category.id, description: '') } }
+
+      it 'should not create the product' do
+        expect { do_request }.to_not change(Product, :count)
+        response.should render_template :new
+      end
     end
   end
 end

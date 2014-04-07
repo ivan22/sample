@@ -10,8 +10,13 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(create_params)
-    @product.save!
-    redirect_to new_product_url, notice: 'Product created successfully!'
+
+    if @product.save
+      redirect_to new_product_url, notice: 'Product created successfully!'
+    else
+      @categories = Category.all
+      render :new
+    end
   end
 
   private

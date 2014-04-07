@@ -44,6 +44,7 @@ group :development, :test do
   gem 'shoulda'
   gem "capybara" # add "require 'capybara/rspec'" to spec_helper
   gem 'selenium-webdriver'
+  gem "factory_girl_rails"
 end
 
 # Use ActiveModel has_secure_password

@@ -4,8 +4,13 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    category = Category.create!(create_params)
-    redirect_to new_category_url, notice: 'Category created successfully'
+    @category = Category.new(create_params)
+
+    if @category.save
+      redirect_to new_category_url, notice: 'Category created successfully'
+    else
+      render :new
+    end
   end
 
   private
