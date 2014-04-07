@@ -63,4 +63,32 @@ describe ProductsController do
       response.should render_template :new
     end
   end
+
+  describe '#update' do
+    def do_request
+      patch :update, product_params
+    end
+
+    let!(:product) { create(:product) }
+    let!(:product_params) { {product: attributes_for(:product, description: 'New description'), id: product.id} }
+
+    context 'Success' do
+
+      it 'should update the product' do
+        do_request
+        assigns(:product).description.should == 'New description'
+        response.should redirect_to products_url
+      end
+    end
+
+    context 'Failure' do
+      let!(:product_params) { {product: attributes_for(:product, description: ''), id: product.id} }
+
+      it 'should not update the product' do
+        do_request
+        product.reload.description.should_not == ''
+        response.should render_template :new
+      end
+    end
+  end
 end

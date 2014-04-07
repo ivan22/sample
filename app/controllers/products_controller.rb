@@ -24,6 +24,16 @@ class ProductsController < ApplicationController
     render :new
   end
 
+  def update
+    @product = Product.find(product_id)
+
+    if @product.update(update_params)
+      redirect_to products_url
+    else
+      render :new
+    end
+  end
+
   private
 
   def create_params
@@ -32,6 +42,7 @@ class ProductsController < ApplicationController
                                     :price,
                                     :category_id)
   end
+  alias_method :update_params, :create_params
 
   def product_id
     params.require(:id)
