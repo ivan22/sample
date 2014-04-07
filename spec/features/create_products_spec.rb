@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Create Product Workflow' do
-  it 'creates and displays a list of products' do
+  it 'creates a category and product' do
     visit '/categories/new'
     page.should have_content 'Create Category'
 

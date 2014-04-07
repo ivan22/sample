@@ -4,7 +4,13 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    category = Category.create!(params.require(:category).permit(:title))
+    category = Category.create!(create_params)
     redirect_to new_category_url, notice: 'Category created successfully'
+  end
+
+  private
+
+  def create_params
+    params.require(:category).permit(:title)
   end
 end

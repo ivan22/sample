@@ -9,10 +9,12 @@ describe CategoriesController do
   end
 
   describe '#create' do
+    def do_request
+      post :create, {category: {title: '123'}}
+    end
+
     it 'creates a new category' do
-      expect {
-        post :create, {category: {title: '123'}}
-      }.to change(Category, :count).by(1)
+      expect { do_request }.to change(Category, :count).by(1)
       response.should redirect_to new_category_url
     end
   end

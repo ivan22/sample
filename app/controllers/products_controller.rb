@@ -9,8 +9,17 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(params.require(:product).permit(:title, :description, :price, :category_id))
+    @product = Product.new(create_params)
     @product.save!
     redirect_to new_product_url, notice: 'Product created successfully!'
+  end
+
+  private
+
+  def create_params
+    params.require(:product).permit(:title,
+                                    :description,
+                                    :price,
+                                    :category_id)
   end
 end
