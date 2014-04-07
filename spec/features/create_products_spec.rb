@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Create Product Workflow' do
-  it 'allows user to create a product' do
+  it 'creates and displays a list of products' do
     visit 'products/new'
     page.should have_content 'Create New Product'
 
@@ -11,5 +11,9 @@ describe 'Create Product Workflow' do
 
     click_on "Create Product"
     page.should have_content 'Product created successfully!'
+
+    visit '/products'
+    page.should have_content 'Product Listing'
+    page.should have_content 'Ruby book'
   end
 end
