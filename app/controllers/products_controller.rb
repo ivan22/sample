@@ -19,6 +19,11 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+    @product = Product.find(product_id)
+    render :new
+  end
+
   private
 
   def create_params
@@ -26,5 +31,9 @@ class ProductsController < ApplicationController
                                     :description,
                                     :price,
                                     :category_id)
+  end
+
+  def product_id
+    params.require(:id)
   end
 end

@@ -49,4 +49,18 @@ describe ProductsController do
       end
     end
   end
+
+  describe '#edit' do
+    def do_request
+      get :edit, id: product.id
+    end
+
+    let!(:product) { create(:product) }
+
+    it 'should display an update form' do
+      do_request
+      assigns(:product).id.should == product.id
+      response.should render_template :new
+    end
+  end
 end
