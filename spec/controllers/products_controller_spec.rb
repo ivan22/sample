@@ -1,6 +1,18 @@
 require 'spec_helper'
 
 describe ProductsController do
+  describe '#index' do
+    def do_request
+      get :index
+    end
+
+    it 'should display the list of products' do
+      do_request
+      assigns(:products).should_not be_nil
+      response.should render_template :index
+    end
+  end
+
   describe '#new' do
     def do_request
       get :new

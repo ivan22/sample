@@ -1,6 +1,6 @@
 Sample::Application.routes.draw do
 
-  resources :products, only: [:new, :create]
+  resources :products, only: [:new, :create, :index]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
